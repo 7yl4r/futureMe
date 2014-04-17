@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Linq;
+using sysDiag = System.Diagnostics;
  
 public class deformMesh : MonoBehaviour{
 	public float radius = 0.0f;
@@ -21,7 +22,6 @@ public class deformMesh : MonoBehaviour{
     }
     
 	void Update(){
-        Debug.Log("update()");
         // When no button is pressed we update the mesh collider
         if (!Input.GetMouseButton (0)){
             // Apply collision mesh when we let go of button
@@ -113,9 +113,11 @@ public class deformMesh : MonoBehaviour{
 	
 	IEnumerator deformAll(){
 		// deform all points on the meshScan
+		var stopWatch = new sysDiag.Stopwatch();
         Debug.Log("started mesh deformation");
 		Vector3[] vertices = meshScan.mesh.vertices;
         int vertex_count = 0;
+		stopWatch.Start();
         for (int i=0; i<vertices.Length; i++){
             vertices[i] = moveVertex(vertices[i]);
             meshScan.mesh.vertices = vertices;
@@ -125,7 +127,12 @@ public class deformMesh : MonoBehaviour{
             Debug.Log(vertex_count.ToString() + "vertices deformed");
             yield return 0;
         }
-        Debug.Log("done.");
+		stopWatch.Stop();
+		var executionTime = stopWatch.Elapsed;
+		var perVertex = (executionTime.TotalMinutes)/vertex_count*60*1000;
+        Debug.Log("done. Time to completion:"
+			+executionTime.ToString()
+			+", "+perVertex.ToString()+"ms per vertex.");
         yield return 1;
     }
 	
