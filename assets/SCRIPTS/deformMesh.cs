@@ -105,7 +105,7 @@ public class deformMesh : MonoBehaviour{
         
     //    Vector3 relativePoint = meshScan.transform.InverseTransformPoint(vertex);
         
-		Vector3 motion = NearestPointOnMesh.lerpMove(vertex,meshGoal,percentTowards);
+		Vector3 motion = lerpNearestOnMesh.lerpMove(vertex,meshGoal,percentTowards);
 			
         vertex += motion ;
 		return vertex;
@@ -177,7 +177,7 @@ public class deformMesh : MonoBehaviour{
 		Vector3[] vertices = meshScan.mesh.vertices;
 		float sqrRadius = radius * radius;
 
-		Vector3 averageNormal = NearestPointOnMesh.lerpMove(position,meshGoal,percentTowards);
+		Vector3 averageNormal = lerpNearestOnMesh.lerpMove(position,meshGoal,percentTowards);
 		
 		// Deform vertices along averaged normal
 		for (int i=0; i<vertices.Length; i++){

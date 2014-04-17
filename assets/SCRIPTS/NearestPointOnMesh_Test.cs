@@ -120,4 +120,3 @@ public class NearestPointOnMesh_Test : UUnitTestCase
 		return m;
 	}
 }
-
