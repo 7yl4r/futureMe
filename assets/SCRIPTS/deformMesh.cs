@@ -56,7 +56,7 @@ public class deformMesh : MonoBehaviour{
                         selectiveDeform(hit.point);
                         break;
                     default:
-                        Debug.Log("unrecognized selection");
+                        Debug.Log("unrecognised selection");
                         break;
                 }
             }

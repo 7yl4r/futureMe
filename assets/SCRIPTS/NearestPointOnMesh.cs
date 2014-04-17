@@ -38,18 +38,24 @@ public class NearestPointOnMesh {
 		BaryCentricDistance.Result result = closestPointCalculator.GetClosestTriangleAndPoint(startPoint);
         Vector3 closest = result.closestPoint;
     */ 
-        Mesh mesh = mf.mesh;
-		VertTriList vt = new VertTriList(mesh);
 		Vector3 objSpacePt = mf.transform.InverseTransformPoint(startPoint);
-		Vector3[] verts = mesh.vertices;
-		KDTree kd = KDTree.MakeFromPoints(verts);
-        Vector3 meshPt = getNearestPointOnMesh(objSpacePt, verts, kd, mesh.triangles, vt);
+
+        Vector3 meshPt = getNearestPointOnMesh(objSpacePt, mf);
 		Vector3 closest = mf.transform.TransformPoint(meshPt);
         
         Debug.Log("selected:"+startPoint.ToString()+" nearest:"+closest.ToString());
 		Vector3 towards = closest - startPoint;
 		Debug.Log("movement dir vector"+towards.normalized.ToString());
 		return towards.normalized;
+	}
+	
+	public static Vector3 getNearestPointOnMesh(Vector3 pt, MeshFilter mf){
+		Mesh mesh = mf.mesh;
+		VertTriList vt = new VertTriList(mesh);
+		Vector3[] verts = mesh.vertices;
+		KDTree kd = KDTree.MakeFromPoints(verts);
+		return getNearestPointOnMesh(pt, verts, kd, mesh.triangles, vt);
+
 	}
 	
 	public static Vector3 getNearestPointOnMesh(Vector3 pt, Vector3[] verts, KDTree vertProx, int[] tri, VertTriList vt) {
