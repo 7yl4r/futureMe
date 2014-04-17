@@ -19,11 +19,11 @@ public class lerpNearestOnMesh {
     //Linearly interpolates between given point and nearest point on mesh by fraction t
         Mesh mesh = to.mesh;
 		VertTriList vt = new VertTriList(mesh);
-		Vector3 objSpacePt = to.transform.InverseTransformPoint(from);
+		Vector3 objSpacePt = from;// to.transform.InverseTransformPoint(from);
 		Vector3[] verts = mesh.vertices;
 		KDTree kd = KDTree.MakeFromPoints(verts);
         Vector3 meshPt = NearestPointOnMesh.getNearestPointOnMesh(objSpacePt, verts, kd, mesh.triangles, vt);
-		Vector3 closest = to.transform.TransformPoint(meshPt);
+		Vector3 closest = meshPt; //= to.transform.TransformPoint(meshPt);
         
         Debug.Log("selected:"+from.ToString()+" nearest:"+closest.ToString());
 		Vector3 towards = Vector3.Lerp(from,closest,t);
