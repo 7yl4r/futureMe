@@ -5,7 +5,7 @@ using System.Linq;
 public class deformMesh : MonoBehaviour{
 	public float radius = 0.0f;
 	public float pull = 1.0f;
-    public float percentTowards = .5f;
+    public float percentTowards = 1.0f;
 	public MeshFilter meshGoal;
 	public MeshFilter meshScan;
 

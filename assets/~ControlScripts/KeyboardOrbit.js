@@ -1,13 +1,13 @@
 
 
 var target : Transform;
-var distanceMin = 10.0;
-var distanceMax = 15.0;
-var distanceInitial = 12.5;
+var distanceMin = 1.0;
+var distanceMax = 100.0;
+var distanceInitial = 15;
 var scrollSpeed = 1.0;
 
-var xSpeed = 250.0;
-var ySpeed = 120.0;
+var xSpeed = 200.0;
+var ySpeed = 100.0;
 
 var yMinLimit = -20;
 var yMaxLimit = 80;
