@@ -101,6 +101,26 @@ public class NearestPointOnMesh_Test : UUnitTestCase
 	  	UUnitAssert.Equals( projection, result );
 	}
 	
+	[UUnitTest]
+	public void nearestPointOnScaledCube_is_scaled(){
+		// ensures that a point at 1,0,0 moves to a point at .5,0,0 if cube at origin w/ scale .5,.5,.5
+		Debug.Log(" === scaled cube test === ");
+
+		
+		Vector3 p = new Vector3(1,2,2);
+		
+		GameObject cu = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		cu.transform.localScale = new Vector3(0.5f,2f,2f);
+		MeshFilter mf = cu.GetComponent<MeshFilter>();
+		
+		Vector3 expected = new Vector3(.5f,2f,2f);
+		Vector3 result = NearestPointOnMesh.getNearestPointOnMesh(p,mf);
+		
+		Debug.Log(expected.ToString() + "=?=" + result.ToString());
+		
+		UUnitAssert.Equals( expected, result);
+	
+	}
 	
 	// HELPERS
 	Mesh CreateMesh(Vector3[] v)
