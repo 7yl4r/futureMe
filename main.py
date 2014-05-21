@@ -4,28 +4,42 @@ This is the main script which runs all subscripts.
 
 from subprocess import call
 
+# global consts
 MH    = './makehuman.py'  # path to makehuman .exe or .py main on the system
 BLEND = 'blender'  # path to blender on this system
 
-mh_options = dict()  # dict of options to pass to makehuman
+# global vars
+mh_options = {}  # dict of options to pass to makehuman
 scene_script = 'basic'  # path to the script to use in blender
 
-def dict2cmdstr(dic):
-    '''
-    converts cmd-line options dict into cmd-line string for use with makehuman
-    '''
-    cmdstr = ''
-    
-    # TODO: map dict keys to mh cmd args 
-    
-    return cmdstr
+# get images, head model, user data
+IMAGES = ['./IMG/'+str(i)+'.png' for i in range(0,3)]
+HEAD_SCAN= './head.obj'  # path to the head scan model
 
-# TODO: get images, model, user data
+# process images to get features
+import image_processor.mock  # TODO: use real image processor
+user_features = image_processor.mock.getFeatures(images=IMAGES, headScan=HEAD_SCAN)
 
-# TODO: create makehuman model
-# call([MH + cmdstr])
+# create model
+import modeler.make_human.makeModel as makeModel
+CURRENT_BODY = './currentMe.mhx'  # path to the body model
+makeModel(user_features, loc=CURRENT_BODY)
 
-# TODO: open blender scene-making script
-# call([BLEND, '-P', scene_script]
 
-# TODO: view (or send to viewer) the rendering made by makehuman
+# TODO: compute changes to model conditioned on user data
+# (converts features+data+time into future features)
+# import predictor.mock.predictFeatures as predictFeatures
+future_features = user_features # predictFeatures(user_features, data)
+
+
+# TODO: modify body model
+FUTURE_BODY = './futureMe.mhx'  # path to the body model
+makeModel(future_features, loc=FUTURE_BODY)
+
+
+# TODO: make the scene
+# import viewer.blender.makeScene as makeScene  # NOTE: blender is a modeler & viewer. shouldn't the "model" from modeler be head+body?
+# makeScene(CURRENT_BODY, FUTURE_BODY, ...)
+# this should do something like... call([BLEND, '-P', scene_script]
+
+# TODO: view (or send to viewer) the rendering
