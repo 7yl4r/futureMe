@@ -1,3 +1,9 @@
+# pycharm meta
+.idea*
+
+# compiled python scripts
+*.pyc
+
 # unity meta files:
 *.meta
 
