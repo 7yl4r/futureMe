@@ -249,6 +249,8 @@ def _dict2cmdstr(dic):
       # macrodetails/African	African ethnicity of the human (the three ethnicity values are normalized so they sum to 100%).
       # macrodetails/Asian	Asian ethnicity of the human (the three ethnicity values are normalized so they sum to 100%).
       # macrodetails/Caucasian	Caucasian ethnicity of the human (the three ethnicity values are normalized so they sum to 100%).
+
+    ### === !!! THESE ARE IMPORTANT ONES !!! === ###
       # macrodetails-universal/Muscle	Amount of muscle mass.
       # macrodetails-universal/Weight	The weight of the human.
       # macrodetails-height/Height	The height/length of the human.

@@ -4,7 +4,12 @@ Accepts any arguments, does no actual image/model processing, and returns a dict
 
 def getFeatures(**kwargs):
 	return dict(
-            fitness=0.5,
-			height=2
+            age=30,
+			gender=0.9,
+            race='caucasian',
+            muscle='.5',
+            weight='.5',
+            hieght='.5',
+            proportions='.5'
     )
 			
