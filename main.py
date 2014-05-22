@@ -5,7 +5,7 @@ This is the main script which runs all subscripts.
 from os import listdir, getcwd
 
 # global consts
-MH    = 'python C:\Users\twm4061\Documents\duststorm01-makehuman-commandline-d0aef702b167\makehuman\makehuman.py'  # path to makehuman .exe or .py main on the system
+MH    = 'python C:\Users\\twm4061\Documents\duststorm01-makehuman-commandline-d0aef702b167\makehuman\makehuman.py'  # path to makehuman .exe or .py main on the system
 BLEND = 'blender'  # path to blender on this system
 
 # global vars

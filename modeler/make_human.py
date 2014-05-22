@@ -12,7 +12,9 @@ def makeModel(features, makehumanPath, loc):
     Returns model location if success, else returns false.
     '''
     cmdstr = _dict2cmdstr(features)
-    call(makehumanPath + cmdstr + " -o "+loc)
+    cmd = makehumanPath + cmdstr + " -o "+loc
+    print cmd
+    call(cmd) #,stderr=STDOUT, shell=True)
 
 
 # PRIVATE FUNCTIONS
