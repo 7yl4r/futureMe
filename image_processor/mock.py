@@ -3,8 +3,8 @@ Accepts any arguments, does no actual image/model processing, and returns a dict
 '''
 
 def getFeatures(**kwargs):
-	return {
-			'fitness'=0.5
-			'height' =2
-			}
+	return dict(
+            fitness=0.5,
+			height=2
+    )
 			

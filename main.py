@@ -2,10 +2,10 @@
 This is the main script which runs all subscripts.
 '''
 
-from subprocess import call
+from os import listdir, getcwd
 
 # global consts
-MH    = './makehuman.py'  # path to makehuman .exe or .py main on the system
+MH    = 'python C:\Users\twm4061\Documents\duststorm01-makehuman-commandline-d0aef702b167\makehuman\makehuman.py'  # path to makehuman .exe or .py main on the system
 BLEND = 'blender'  # path to blender on this system
 
 # global vars
@@ -13,17 +13,17 @@ mh_options = {}  # dict of options to pass to makehuman
 scene_script = 'basic'  # path to the script to use in blender
 
 # get images, head model, user data
-IMAGES = ['./IMG/'+str(i)+'.png' for i in range(0,3)]
-HEAD_SCAN= './head.obj'  # path to the head scan model
+IMAGES = [getcwd()+'/data/img/'+str(f) for f in listdir('./data/img/')]
+HEAD_SCAN= getcwd()+'/data/3dscan/mesh.obj'  # path to the head scan model
 
 # process images to get features
 import image_processor.mock  # TODO: use real image processor
 user_features = image_processor.mock.getFeatures(images=IMAGES, headScan=HEAD_SCAN)
 
 # create model
-import modeler.make_human.makeModel as makeModel
-CURRENT_BODY = './currentMe.mhx'  # path to the body model
-makeModel(user_features, loc=CURRENT_BODY)
+from modeler.make_human import makeModel
+CURRENT_BODY = getcwd()+'/data/currentMe.mhx'  # path to the body model
+makeModel(user_features, MH, CURRENT_BODY)
 
 
 # TODO: compute changes to model conditioned on user data
@@ -33,8 +33,8 @@ future_features = user_features # predictFeatures(user_features, data)
 
 
 # TODO: modify body model
-FUTURE_BODY = './futureMe.mhx'  # path to the body model
-makeModel(future_features, loc=FUTURE_BODY)
+FUTURE_BODY = getcwd()+'/data/futureMe.mhx'  # path to the body model
+makeModel(future_features, MH, FUTURE_BODY)
 
 
 # TODO: make the scene

@@ -1,0 +1,5 @@
+# ignore all data in here
+*
+
+# Except this file
+!.gitignore
