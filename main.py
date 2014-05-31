@@ -15,7 +15,7 @@ MH = 'python C:\Users\\7yl4r\Documents\makehuman-commandline\makehuman\makehuman
 BLEND = 'blender'
 
 # === global vars ===
-mh_options = {}  # dict of options to pass to makehuman
+mh_options = {}  # dict of options to pass to makehuman
 scene_script = 'basic'  # path to the script to use in blender
 
 

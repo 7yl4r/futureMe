@@ -26,19 +26,63 @@ def _dict2cmdstr(dic):
 	last updated 2014-05-20.
     '''
     cmdstr = ''
-
-    # TODO: map dict keys to mh cmd args
+    
+    #   --age AGE             Human age, in years
+    try:
+        age = dic['age']
+        cmdstr+=' --age '+str(age)
+    except Exception:
+        print 'age not given'
+        
+    #   --gender GENDER       Human gender (0.0: female, 1.0: male)
+    try:
+        gen = dic['gender']
+        cmdstr+= ' --gender '+str(gen)
+    except Exception:
+        print 'gender not given'
+        
+    #   --race RACE           One of [caucasian, asian, african]
+    try:
+        race = dic['race']
+        cmdstr+=' --race '+str(race)
+    except Exception:
+        print 'race not given'
+        
+    # macrodetails-universal/Weight	The weight of the human. TODO: units???
+    try:
+        weight = dic['weight']
+        cmdstr+=' -m macrodetails-universal/Weight '+str(weight)
+    except Exception:
+        print 'weight not given'
+    
+    # macrodetails-universal/Muscle	Amount of muscle mass. TODO: units???
+    try:
+        musc = dic['muscle']
+        cmdstr+=' -m macrodetails-universal/Muscle '+str(musc)
+    except Exception:
+        print 'muscle mass not given'
+    
+    # macrodetails-height/Height	The height/length of the human. TODO: units???
+    try:
+        h = dic['height']
+        cmdstr+=' -m macrodetails-height/Height '+str(h)
+    except Exception:
+        print 'height not given'
+        
+    # macrodetails-proportions/BodyProportions	Proportions of the human features, often subjectively referred to as qualities of beauty (min is unusual, center position is average and max is idealistic proportions).
+    try:
+        pro = dic['proportions']
+        cmdstr+=' -m macrodetails-proportions/BodyProportions '+str(pro)
+    except Exception:
+        print 'proportions not given'
 
 # === relevant parts from makehuman -h : ===
 #     Macro properties:
 #   Optional macro properties to set on human
-#   --age AGE             Human age, in years
-#   --gender GENDER       Human gender (0.0: female, 1.0: male)
 #   --male                Produces a male character (overrides the gender
 #                         argument)
 #   --female              Produces a female character (overrides the gender
 #                         argument)
-#   --race RACE           One of [caucasian, asian, african]
 
 
 # === Modifiers loading: ===
@@ -249,12 +293,6 @@ def _dict2cmdstr(dic):
       # macrodetails/African	African ethnicity of the human (the three ethnicity values are normalized so they sum to 100%).
       # macrodetails/Asian	Asian ethnicity of the human (the three ethnicity values are normalized so they sum to 100%).
       # macrodetails/Caucasian	Caucasian ethnicity of the human (the three ethnicity values are normalized so they sum to 100%).
-
-    ### === !!! THESE ARE IMPORTANT ONES !!! === ###
-      # macrodetails-universal/Muscle	Amount of muscle mass.
-      # macrodetails-universal/Weight	The weight of the human.
-      # macrodetails-height/Height	The height/length of the human.
-      # macrodetails-proportions/BodyProportions	Proportions of the human features, often subjectively referred to as qualities of beauty (min is unusual, center position is average and max is idealistic proportions).
 
 #   --material materialFile
 #                         Specify a skin material to apply to the human
